@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATLAS MILITARY - Hivatalos Weboldala</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #2cd2ec;
+        --primary-dark: #1eaebf;
+        --bg-dark: #0f1012;
+        --bg-card: #1a1c20;
+        --text-light: #ffffff;
+        --text-gray: #a0a0a0;
+        --success: #00ff88;
+        --error: #ff4444;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        overflow-x: hidden;
+        min-height: 100vh;
+        background-image:
+          linear-gradient(rgba(15, 16, 18, 0.9), rgba(15, 16, 18, 0.95)),
+          url("https://wallpaperaccess.com/full/254274.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Rajdhani", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .highlight {
+        color: var(--primary-color);
+        text-shadow: 0 0 15px rgba(44, 210, 236, 0.4);
+      }
+
+      /* --- Navigáció --- */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(15, 16, 18, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 0.5rem 5%;
+        border-bottom: 1px solid rgba(44, 210, 236, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-light);
+        text-decoration: none;
+      }
+      .logo img {
+        height: 50px;
+        width: auto;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        align-items: center;
+      }
+      .nav-links li {
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+        position: relative;
+        padding: 10px 0;
+      }
+      .nav-links li:hover,
+      .nav-links li.active {
+        color: var(--primary-color);
+      }
+
+      /* Dropdown Menu */
+      .dropdown {
+        position: relative;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--bg-card);
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 3px solid var(--primary-color);
+        border-radius: 0 0 5px 5px;
+        z-index: 1;
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      .dropdown-content div {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        font-size: 0.9rem;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+      .dropdown-content div:hover {
+        background-color: rgba(44, 210, 236, 0.1);
+        color: var(--primary-color);
+      }
+
+      .btn-join {
+        padding: 10px 25px;
+        background: var(--primary-color);
+        color: var(--bg-dark);
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 3px;
+        font-family: "Rajdhani", sans-serif;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-join:hover {
+        background: var(--primary-dark);
+        box-shadow: 0 0 15px var(--primary-color);
+      }
+
+      /* --- Oldal Tartalom --- */
+      .page-section {
+        display: none;
+        padding: 120px 5% 60px 5%;
+        min-height: 100vh;
+        animation: fadeIn 0.5s ease;
+      }
+      .page-section.active-page {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- Hero --- */
+      .hero {
+        text-align: center;
+        margin-top: 10vh;
+      }
+      .hero h1 {
+        font-size: 4rem;
+        margin-bottom: 20px;
+      }
+      .hero p {
+        font-size: 1.2rem;
+        color: var(--text-gray);
+        max-width: 700px;
+        margin: 0 auto 30px;
+      }
+
+      /* --- Csapat Kártyák --- */
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .team-card {
+        background: var(--bg-card);
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: 0.3s;
+      }
+      .team-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-color);
+      }
+      .team-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--primary-color);
+        margin-bottom: 15px;
+      }
+      .team-role {
+        background: rgba(44, 210, 236, 0.1);
+        color: var(--primary-color);
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      /* --- Támogatás --- */
+      .support-box {
+        background: var(--bg-card);
+        padding: 40px;
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: 10px;
+        border: 1px solid var(--primary-color);
+      }
+
+      /* --- Status --- */
+      .status-box {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--primary-color);
+        padding: 40px;
+        text-align: center;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .status-indicator {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        transition: 0.3s;
+      }
+      .status-indicator.online {
+        color: var(--success);
+        text-shadow: 0 0 20px var(--success);
+      }
+      .status-indicator.offline {
+        color: var(--error);
+      }
+
+      /* --- FORM STÍLUSOK (MODERN) --- */
+      .container-box {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--bg-card);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .tab-header {
+        display: flex;
+        background: rgba(0, 0, 0, 0.3);
+      }
+      .tab-btn {
+        flex: 1;
+        padding: 20px;
+        background: none;
+        border: none;
+        color: var(--text-gray);
+        font-family: "Rajdhani", sans-serif;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: 0.3s;
+        border-bottom: 3px solid transparent;
+      }
+      .tab-btn.active {
+        color: var(--primary-color);
+        border-bottom: 3px solid var(--primary-color);
+        background: rgba(44, 210, 236, 0.05);
+      }
+
+      .content-body {
+        display: none;
+        padding: 40px;
+      }
+      .content-body.active {
+        display: block;
+        animation: fadeIn 0.4s;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+        position: relative;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+
+      .form-group input[type="text"],
+      .form-group textarea,
+      .form-group input[type="email"] {
+        width: 100%;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid #333;
+        color: white;
+        border-radius: 4px;
+        font-family: "Roboto", sans-serif;
+        transition: 0.3s;
+      }
+      .form-group textarea {
+        resize: none;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 10px rgba(44, 210, 236, 0.1);
+      }
+
+      /* --- Új Checkbox Design (Custom Radio) --- */
+      .custom-radio-group {
+        display: flex;
+        gap: 30px;
+        margin-top: 10px;
+      }
+      .custom-radio-label {
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+        color: var(--text-gray);
+        user-select: none;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+      }
+      .custom-radio-label:hover {
+        color: white;
+      }
+      .custom-radio-label input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      /* A négyzet */
+      .checkmark {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 22px;
+        width: 22px;
+        background-color: transparent;
+        border: 2px solid var(--text-gray);
+        border-radius: 4px;
+        transition: 0.3s;
+      }
+      .custom-radio-label:hover input ~ .checkmark {
+        border-color: var(--primary-color);
+      }
+      .custom-radio-label input:checked ~ .checkmark {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      /* A pipa */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      .custom-radio-label input:checked ~ .checkmark:after {
+        display: block;
+      }
+      .custom-radio-label .checkmark:after {
+        left: 7px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid #0f1012;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+
+      /* --- Drag & Drop Zóna --- */
+      .drop-zone {
+        border: 2px dashed #444;
+        border-radius: 8px;
+        padding: 40px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        background: rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+      .drop-zone:hover,
+      .drop-zone.dragover {
+        border-color: var(--primary-color);
+        background: rgba(44, 210, 236, 0.05);
+      }
+      .drop-zone p {
+        color: var(--text-gray);
+        pointer-events: none;
+      }
+      .drop-zone i {
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        pointer-events: none;
+      }
+
+      /* Fájl Lista */
+      .file-list {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .file-item {
+        background: #222;
+        padding: 10px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 3px solid var(--primary-color);
+        animation: fadeIn 0.3s;
+      }
+      .file-name {
+        font-size: 0.9rem;
+        color: #fff;
+      }
+      .remove-file {
+        color: #ff4444;
+        cursor: pointer;
+        transition: 0.2s;
+        font-weight: bold;
+        padding: 5px;
+      }
+      .remove-file:hover {
+        color: #ff8888;
+        transform: scale(1.1);
+      }
+
+      /* Rejtett Email Mező */
+      .hidden-input {
+        display: none;
+        margin-top: 15px;
+        animation: slideDown 0.3s ease-out;
+      }
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background: transparent;
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        font-family: "Rajdhani", sans-serif;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+        margin-top: 30px;
+      }
+      .submit-btn:hover {
+        background: var(--primary-color);
+        color: black;
+        box-shadow: 0 0 20px rgba(44, 210, 236, 0.4);
+      }
+
+      /* Szabályzat Lista (Régi stílus) */
+      .rules-list {
+        margin-left: 20px;
+        margin-top: 20px;
+      }
+      .rules-list li {
+        margin-bottom: 15px;
+        line-height: 1.6;
+      }
+
+      footer {
+        background: #0a0a0a;
+        padding: 20px;
+        text-align: center;
+        margin-top: 50px;
+        border-top: 1px solid #222;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .logo span {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#" class="logo" onclick="switchPage('home')">
+        <img src="https://files.catbox.moe/44whoo.png" alt="Logo" />
+        ATLAS<span class="highlight">MILITARY</span>
+      </a>
+      <ul class="nav-links">
+        <li onclick="switchPage('home')" class="active">Főoldal</li>
+        <li class="dropdown">
+          Rólunk
+          <i
+            class="fas fa-chevron-down"
+            style="font-size: 0.8rem; margin-left: 5px"
+          ></i>
+          <div class="dropdown-content">
+            <div onclick="switchPage('team')">Csapatunk</div>
+            <div onclick="switchPage('support')">Támogatás</div>
+          </div>
+        </li>
+        <li onclick="switchPage('status')">Szerver Státusz</li>
+        <li onclick="switchPage('rules')">Szabályzat</li>
+        <li onclick="switchPage('unban')">Unban Kérelem</li>
+      </ul>
+      <a href="https://discord.gg/xJuG66BcYb" target="_blank" class="btn-join">
+        <i class="fab fa-discord"></i> Csatlakozás
+      </a>
+    </nav>
+
+    <div id="home" class="page-section active-page">
+      <div class="hero">
+        <h1>
+          Üdvözöl az <span class="highlight">ATLAS MILITARY</span> Csapata
+        </h1>
+        <p>
+          Professzionális Roleplay, Katonai szimuláció és Közösség. Csatlakozz
+          az elithez!
+        </p>
+        <button
+          onclick="switchPage('unban')"
+          class="submit-btn"
+          style="width: auto; padding: 15px 40px"
+        >
+          Unban Kérelem Írása
+        </button>
+      </div>
+    </div>
+
+    <div id="team" class="page-section">
+      <h2 class="highlight" style="text-align: center; margin-bottom: 50px">
+        Vezetőség és Staff
+      </h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img
+            src="https://cdn.discordapp.com/embed/avatars/0.png"
+            alt="Avatar"
+            class="team-img"
+          />
+          <h3>Admin Neve</h3>
+          <p style="color: #888">user#1234</p>
+          <span class="team-role">Tulajdonos</span>
+        </div>
+        <div class="team-card">
+          <img
+            src="https://cdn.discordapp.com/embed/avatars/1.png"
+            alt="Avatar"
+            class="team-img"
+          />
+          <h3>Admin Neve 2</h3>
+          <p style="color: #888">user#5678</p>
+          <span class="team-role">Főadmin</span>
+        </div>
+        <div class="team-card">
+          <img
+            src="https://cdn.discordapp.com/embed/avatars/2.png"
+            alt="Avatar"
+            class="team-img"
+          />
+          <h3>Admin Neve 3</h3>
+          <p style="color: #888">user#9999</p>
+          <span class="team-role">Moderátor</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="support" class="page-section">
+      <h2 class="highlight" style="text-align: center; margin-bottom: 40px">
+        Szerver Támogatása
+      </h2>
+      <div class="support-box">
+        <i
+          class="fas fa-gem"
+          style="
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+          "
+        ></i>
+        <h3>Támogasd a szervert!</h3>
+        <p style="margin: 20px 0; color: #bbb">
+          A szerver fenntartása költségekkel jár. Ha tetszik a munkánk,
+          támogatásoddal segítheted a fejlődést.
+        </p>
+        <a
+          href="https://paypal.me/te_linked"
+          target="_blank"
+          class="submit-btn"
+          style="
+            display: inline-block;
+            text-decoration: none;
+            background: #00457c;
+            border-color: #00457c;
+            color: white;
+          "
+        >
+          <i class="fab fa-paypal"></i> PayPal Támogatás
+        </a>
+      </div>
+    </div>
+
+    <div id="status" class="page-section">
+      <h2
+        class="highlight"
+        style="font-size: 2.5rem; text-align: center; margin-bottom: 40px"
+      >
+        Szerver Állapot
+      </h2>
+      <div class="status-box">
+        <div id="status-icon" class="status-indicator">
+          <i class="fas fa-circle-notch fa-spin"></i>
+        </div>
+        <h3 id="server-status-text">Keresés...</h3>
+        <p id="player-count" style="font-size: 1.5rem; margin: 10px 0">
+          - / - Játékos
+        </p>
+        <div style="margin-top: 20px">
+          <button class="submit-btn" onclick="fetchServerData()">
+            Frissítés
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="rules" class="page-section">
+      <h2 class="highlight" style="text-align: center; margin-bottom: 30px">
+        Dokumentumok
+      </h2>
+      <div class="container-box">
+        <div class="tab-header">
+          <button
+            class="tab-btn active"
+            onclick="openContentTab('rules', 'server-rules', this)"
+          >
+            Szerver Szabályzat
+          </button>
+          <button
+            class="tab-btn"
+            onclick="openContentTab('rules', 'discord-rules', this)"
+          >
+            Discord Szabályzat
+          </button>
+          <button
+            class="tab-btn"
+            onclick="openContentTab('rules', 'aszf', this)"
+          >
+            ÁSZF
+          </button>
+        </div>
+
+        <div id="server-rules" class="content-body active">
+          <h3>⚠️ Szerver Szabályzat</h3>
+          <hr style="border-color: #333; margin: 15px 0" />
+          <ul class="rules-list">
+            <li>1. Tilos a közösségromboló magatartás minden formája.</li>
+            <li>2. A bugkihasználás azonnali kitiltást von maga után.</li>
+            <li>3. Tilos a NonRP (Roleplay szabályok megszegése).</li>
+            <li>4. Tisztelet minden játékos és staff tag felé kötelező.</li>
+          </ul>
+        </div>
+
+        <div id="discord-rules" class="content-body">
+          <h3>👾 Discord Szabályzat</h3>
+          <hr style="border-color: #333; margin: 15px 0" />
+          <ul class="rules-list">
+            <li>1. Ne spameld a csatornákat.</li>
+            <li>2. Tilos a hirdetés engedély nélkül.</li>
+            <li>3. Használd a megfelelő szobákat a megfelelő témákra.</li>
+            <li>4. Ne zaklasd a tagokat privát üzenetben.</li>
+          </ul>
+        </div>
+
+        <div id="aszf" class="content-body">
+          <h3>📄 Általános Szerződési Feltételek</h3>
+          <hr style="border-color: #333; margin: 15px 0" />
+          <p style="line-height: 1.6">
+            A szerverre való belépéssel elfogadod, hogy a fiókod és a virtuális
+            javaid a szerver tulajdonát képezik.<br /><br />
+            A támogatások (donations) önkéntes alapúak, és semmilyen körülmények
+            között nem visszatéríthetőek. A szerver vezetősége fenntartja a
+            jogot a szolgáltatás bármikori módosítására vagy megszüntetésére.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="unban" class="page-section">
+      <h2 class="highlight" style="text-align: center; margin-bottom: 30px">
+        Unban Kérelem
+      </h2>
+      <div class="container-box">
+        <div class="tab-header">
+          <button
+            class="tab-btn active"
+            onclick="openContentTab('unban', 'serverForm', this)"
+          >
+            Szerver Unban
+          </button>
+          <button
+            class="tab-btn"
+            onclick="openContentTab('unban', 'discordForm', this)"
+          >
+            Discord Unban
+          </button>
+        </div>
+
+        <form id="serverForm" class="content-body active">
+          <div class="form-group">
+            <label>Discord Neved</label>
+            <input
+              type="text"
+              name="dcName"
+              required
+              placeholder="Pl. user#1234"
+            />
+          </div>
+          <div class="form-group">
+            <label>Ban ID</label>
+            <input
+              type="text"
+              name="banId"
+              required
+              placeholder="A ban képernyőn látható ID"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Jogosnak érzed a bant?</label>
+            <div class="custom-radio-group">
+              <label class="custom-radio-label">
+                Igen
+                <input type="radio" name="justified" value="Igen" required />
+                <span class="checkmark"></span>
+              </label>
+              <label class="custom-radio-label">
+                Nem
+                <input type="radio" name="justified" value="Nem" required />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Hol kérsz értesítést?</label>
+            <div class="custom-radio-group">
+              <label class="custom-radio-label">
+                Discord
+                <input
+                  type="radio"
+                  name="notify"
+                  value="Discord"
+                  onchange="toggleEmail('server', false)"
+                  required
+                />
+                <span class="checkmark"></span>
+              </label>
+              <label class="custom-radio-label">
+                Email
+                <input
+                  type="radio"
+                  name="notify"
+                  value="Email"
+                  onchange="toggleEmail('server', true)"
+                  required
+                />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div id="serverEmailInput" class="hidden-input">
+              <input
+                type="email"
+                name="emailAddress"
+                placeholder="Add meg az email címed..."
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Kitiltás oka</label>
+            <input type="text" name="reason" required />
+          </div>
+          <div class="form-group">
+            <label>Miért szeretnél unban-t kapni?</label>
+            <textarea name="explanation" rows="5" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Csatolmányok</label>
+            <div class="drop-zone" id="server-drop-zone">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Kattints ide vagy húzd ide a fájlokat</p>
+              <input type="file" id="server-file-input" multiple hidden />
+            </div>
+            <div class="file-list" id="server-file-list"></div>
+          </div>
+
+          <button
+            type="submit"
+            class="submit-btn"
+            onclick="submitForm(event, 'server')"
+          >
+            Kérelem Beküldése
+          </button>
+        </form>
+
+        <form id="discordForm" class="content-body">
+          <div class="form-group">
+            <label>Discord Neved</label>
+            <input type="text" name="dcName" required />
+          </div>
+          <div class="form-group">
+            <label>Discord ID</label>
+            <input type="text" name="dcId" required />
+          </div>
+
+          <div class="form-group">
+            <label>Jogosnak érzed a bant?</label>
+            <div class="custom-radio-group">
+              <label class="custom-radio-label">
+                Igen
+                <input type="radio" name="justified" value="Igen" required />
+                <span class="checkmark"></span>
+              </label>
+              <label class="custom-radio-label">
+                Nem
+                <input type="radio" name="justified" value="Nem" required />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Hol kérsz értesítést?</label>
+            <div class="custom-radio-group">
+              <label class="custom-radio-label">
+                Discord
+                <input
+                  type="radio"
+                  name="notify"
+                  value="Discord"
+                  onchange="toggleEmail('discord', false)"
+                  required
+                />
+                <span class="checkmark"></span>
+              </label>
+              <label class="custom-radio-label">
+                Email
+                <input
+                  type="radio"
+                  name="notify"
+                  value="Email"
+                  onchange="toggleEmail('discord', true)"
+                  required
+                />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div id="discordEmailInput" class="hidden-input">
+              <input
+                type="email"
+                name="emailAddress"
+                placeholder="Add meg az email címed..."
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Kitiltás Oka</label>
+            <input type="text" name="reason" required />
+          </div>
+          <div class="form-group">
+            <label>Miért szeretnél unban-t kapni?</label>
+            <textarea name="explanation" rows="5" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Csatolmányok</label>
+            <div class="drop-zone" id="discord-drop-zone">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Kattints ide vagy húzd ide a fájlokat</p>
+              <input type="file" id="discord-file-input" multiple hidden />
+            </div>
+            <div class="file-list" id="discord-file-list"></div>
+          </div>
+
+          <button
+            type="submit"
+            class="submit-btn"
+            onclick="submitForm(event, 'discord')"
+          >
+            Kérelem Beküldése
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 ATLAS MILITARY - Minden jog fenntartva.</p>
+    </footer>
+
+    <script>
+      const CONFIG = {
+        webhookServer:
+          "https://discord.com/api/webhooks/1466090939012485284/czv0VwOkDAr_uCU31QLPdBsC1ofj06Fl_pWf6KP3JgTXel5Ae6Jki_MJoNc2CJk1PA0-",
+        webhookDiscord:
+          "https://discord.com/api/webhooks/1466095395594567785/DNygV8F1e7GeKsvHGgoWALp3OEG8d7fr8r1IzlkZGzZO15jNVWmtX2TZMT747p-vlRgt",
+        serverId: "vgmxrr",
+      };
+
+      // --- Alap funkciók (Navigáció, Tabok) ---
+      function switchPage(pageId) {
+        document
+          .querySelectorAll(".page-section")
+          .forEach((p) => p.classList.remove("active-page"));
+        document
+          .querySelectorAll(".nav-links > li")
+          .forEach((l) => l.classList.remove("active"));
+        document.getElementById(pageId).classList.add("active-page");
+        if (pageId === "status") fetchServerData();
+      }
+
+      function openContentTab(sectionId, contentId, btnElement) {
+        const section = document.getElementById(sectionId);
+        section
+          .querySelectorAll(".content-body")
+          .forEach((b) => b.classList.remove("active"));
+        section
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById(contentId).classList.add("active");
+        btnElement.classList.add("active");
+      }
+
+      // --- Email Toggle Logika ---
+      function toggleEmail(type, show) {
+        const container = document.getElementById(type + "EmailInput");
+        const input = container.querySelector("input");
+
+        if (show) {
+          container.style.display = "block";
+          input.required = true;
+        } else {
+          container.style.display = "none";
+          input.required = false;
+          input.value = ""; // Törlés ha Discordra vált
+        }
+      }
+
+      // --- Szerver Státusz ---
+      async function fetchServerData() {
+        const statusIcon = document.getElementById("status-icon");
+        const statusText = document.getElementById("server-status-text");
+        const playerCountEl = document.getElementById("player-count");
+
+        statusIcon.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+
+        try {
+          const res = await fetch(
+            `https://servers-frontend.fivem.net/api/servers/single/${CONFIG.serverId}`,
+          );
+          const data = await res.json();
+          const players = Number(data.Data.clients) || 0;
+          const max = Number(data.Data.sv_maxclients) || 0;
+
+          let current = 0;
+          const interval = setInterval(() => {
+            if (current <= players) {
+              playerCountEl.textContent = current + "/" + max + " Játékos";
+              current++;
+            } else {
+              clearInterval(interval);
+            }
+          }, 20);
+
+          statusText.textContent = "Szerver Online";
+          statusIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+          statusIcon.className = "status-indicator online";
+        } catch (err) {
+          statusText.textContent = "Szerver Offline";
+          statusIcon.innerHTML = '<i class="fas fa-times-circle"></i>';
+          statusIcon.className = "status-indicator offline";
+          playerCountEl.textContent = "0/0 Játékos";
+        }
+      }
+
+      // --- DRAG & DROP FÁJLKEZELÉS ---
+
+      // Fájlok tárolása
+      const fileStorage = {
+        server: [],
+        discord: [],
+      };
+
+      function setupDragDrop(type) {
+        const dropZone = document.getElementById(`${type}-drop-zone`);
+        const fileInput = document.getElementById(`${type}-file-input`);
+        const fileList = document.getElementById(`${type}-file-list`);
+
+        dropZone.addEventListener("click", () => fileInput.click());
+
+        ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+          dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+
+        ["dragenter", "dragover"].forEach((eventName) => {
+          dropZone.addEventListener(
+            eventName,
+            () => dropZone.classList.add("dragover"),
+            false,
+          );
+        });
+        ["dragleave", "drop"].forEach((eventName) => {
+          dropZone.addEventListener(
+            eventName,
+            () => dropZone.classList.remove("dragover"),
+            false,
+          );
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+          const dt = e.dataTransfer;
+          const files = dt.files;
+          handleFiles(files, type);
+        });
+
+        fileInput.addEventListener("change", function () {
+          handleFiles(this.files, type);
+        });
+      }
+
+      function handleFiles(files, type) {
+        const storage = fileStorage[type];
+        for (let i = 0; i < files.length; i++) {
+          storage.push(files[i]);
+        }
+        renderFileList(type);
+      }
+
+      function renderFileList(type) {
+        const storage = fileStorage[type];
+        const listEl = document.getElementById(`${type}-file-list`);
+        listEl.innerHTML = "";
+
+        storage.forEach((file, index) => {
+          const div = document.createElement("div");
+          div.className = "file-item";
+          div.innerHTML = `
+                    <span class="file-name"><i class="fas fa-file"></i> ${file.name}</span>
+                    <span class="remove-file" onclick="removeFile('${type}', ${index})"><i class="fas fa-times"></i></span>
+                `;
+          listEl.appendChild(div);
+        });
+      }
+
+      window.removeFile = function (type, index) {
+        fileStorage[type].splice(index, 1);
+        renderFileList(type);
+        if (event) event.stopPropagation();
+      };
+
+      setupDragDrop("server");
+      setupDragDrop("discord");
+
+      // --- WEBHOOK KÜLDÉS ---
+      async function submitForm(e, type) {
+        e.preventDefault();
+        const form = document.getElementById(`${type}Form`);
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const btn = form.querySelector(".submit-btn");
+        const originalText = btn.innerText;
+        btn.disabled = true;
+        btn.innerText = "Küldés folyamatban...";
+
+        const webhookUrl =
+          type === "server" ? CONFIG.webhookServer : CONFIG.webhookDiscord;
+        const formData = new FormData(form);
+
+        const fields = [];
+        for (let [key, value] of formData.entries()) {
+          if (value.trim() !== "" && key !== "emailAddress") {
+            let label = key;
+            if (key === "dcName") label = "Discord Név";
+            if (key === "banId") label = "Ban ID";
+            if (key === "dcId") label = "Discord ID";
+            if (key === "reason") label = "Indok";
+            if (key === "explanation") label = "Leírás";
+            if (key === "justified") label = "Jogosnak érzi?";
+            if (key === "notify") label = "Értesítést kér";
+
+            fields.push({ name: label, value: value });
+          }
+        }
+
+        const notifyType = formData.get("notify");
+        if (notifyType === "Email") {
+          const email = formData.get("emailAddress");
+          fields.push({ name: "📧 Email Cím", value: email });
+        }
+
+        const embed = {
+          title:
+            type === "server"
+              ? "🖥️ Új Szerver Unban Kérelem"
+              : "👾 Új Discord Unban Kérelem",
+          color: 2937580,
+          fields: fields,
+          footer: {
+            text: "ATLAS MILITARY System • " + new Date().toLocaleString(),
+          },
+        };
+
+        const payload = new FormData();
+        payload.append("payload_json", JSON.stringify({ embeds: [embed] }));
+
+        const files = fileStorage[type];
+        files.forEach((file, index) => {
+          payload.append(`file${index}`, file);
+        });
+
+        try {
+          const response = await fetch(webhookUrl, {
+            method: "POST",
+            body: payload,
+          });
+          if (response.ok) {
+            alert("Sikeres beküldés!");
+            form.reset();
+            fileStorage[type] = [];
+            renderFileList(type);
+            document.getElementById(type + "EmailInput").style.display = "none";
+          } else {
+            alert("Hiba történt a küldéskor.");
+          }
+        } catch (err) {
+          alert("Hálózati hiba: " + err);
+        }
+        btn.disabled = false;
+        btn.innerText = originalText;
+      }
+    </script>
+  </body>
+</html>
